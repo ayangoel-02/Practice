@@ -42,11 +42,11 @@ STEPS TO CREATE MODULE:
   hosts: localhost
   gather_fact: no
   tasks:
-      - name: Say hello
-        hello_world:
-        name: "Ansible or Teraform"
-        register: result
-      - name: Show message
-        debug: 
-        msg: "{{result.message}}"
+    - name: Say hello
+      hello_world:
+      name: "Ansible or Teraform"
+      register: result
+    - name: Show message
+      debug: 
+      msg: "{{result.message}}"
 9. ansible-playbook -i hosts.ini playbook.yml
