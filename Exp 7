@@ -23,30 +23,31 @@ STEPS TO CREATE MODULE:
 1. mkdir -p library
 2. cd library
 3. gedit hello_world.py (Python file)
-4. Type in the file:
-    #!usr/bin/python
-    from ansible.module_utils.basic import AnsibleModule
-    def run_module():
-      module_args = dict(name=dict(type='str',required=True))
-      module = AnsibleModule(argument_spec=module_args)
-      result = {"changed":False, "message":f"Hello,{module.params['name']}!"}
-      module.exit_json(**result)
-    if __name__=="__main__":
-      run_module()
+4. hello_world.py:
+from ansible.module_util.basic import AnsibleModule
+
+def run_module():
+module_args=dict(name=dict(type='str',required=True))
+module=AnsibleModule(argument_spec=module_args)
+result={"changed":False,"message":f"Hello,{module.params['name']}!"}
+module.exit_json(**result)
+
+if __name__:'__main__':
+run_module()
 5. cd ..
 6. chmod +x library/hello_world.py
 7. gedit playbook.yml
 8. Code:
 ---
-- name: Test custom module
+- name: Test Custom Module
   hosts: localhost
-  gather_fact: no
+  gather_facts: no
   tasks:
-    - name: Say hello
-      hello_world:
-      name: "Ansible or Teraform"
-      register: result
-    - name: Show message
-      debug: 
-      msg: "{{result.message}}"
+   - name: Say hello
+     hello_world:
+      name: "Ansible"
+     register: result
+   - name: Show message
+     debug:
+        msg: "{{ result.message }}"
 9. ansible-playbook -i hosts.ini playbook.yml
