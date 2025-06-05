@@ -22,3 +22,34 @@
 > sudo cat /var/lib/jenkins/secrets/initialAdminPassword
 # Create new item copy paste pipeline code
 
+THIS PIPELINE CODE:
+pipeline
+{
+    agent any
+    stages
+    {
+        stage('Checkout')
+        {
+            steps
+            {
+                git branch:'main',url:'https://github.com/AnnaBinoy09/demo_devops.git';// change to your repository path
+            }
+        }
+        stage('Build')
+        {
+            steps
+            {
+                sh 'mvn clean package'
+            }
+        }
+        stage('Test')
+        {
+            steps
+            {
+                sh 'mvn test'
+            }
+        }
+        
+    }
+}
+
