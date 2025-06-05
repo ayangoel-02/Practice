@@ -8,5 +8,5 @@
      become_method: su
      copy:
        src: "/var/lib/jenkins/workspace/HelloMaven/target/my-app-1.0-SNAPSHOT.jar"
-       dest: "/home/external/P8/t.jar"
+       dest: "/home/externals/P8/t.jar"
        
